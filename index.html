@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Валентинка</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        #content {
+            text-align: center;
+        }
+        #buttons {
+            margin-top: 20px;
+        }
+        #yesButton, #noButton {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #yesButton:hover, #noButton:hover {
+            background-color: lightgray;
+        }
+        #penguin {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+            animation: dance 2s infinite;
+        }
+        @keyframes dance {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        #hearts {
+            display: none;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <h1>Солнышко, ты станешь моей валентинкой?</h1>
+        <img id="penguin" src="penguin.gif" alt="Пингвин">
+        <div id="buttons">
+            <button id="yesButton">Да</button>
+            <button id="noButton">Нет</button>
+        </div>
+        <img id="hearts" src="hearts.png" alt="Сердечки">
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const hearts = document.getElementById('hearts');
+
+        yesButton.addEventListener('click', () => {
+            yesButton.style.display = 'none';
+            noButton.style.display = 'none';
+            document.getElementById('content').innerHTML = '<h1>Ураа, люблю тебя!</h1>';
+            hearts.style.display = 'block';
+        });
+
+        noButton.addEventListener('click', () => {
+            const penguin = document.getElementById('penguin');
+            const rect = noButton.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const newX = Math.random() * (window.innerWidth - rect.width);
+            const newY = Math.random() * (window.innerHeight - rect.height);
+            noButton.style.transition = 'transform 1s';
+            noButton.style.transform = `translate(${newX - centerX}px, ${newY - centerY}px)`;
+            setTimeout(() => {
+                noButton.style.transition = '';
+                noButton.style.transform = '';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
+
+
